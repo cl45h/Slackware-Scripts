@@ -183,6 +183,47 @@ descargar_y_extraer_kernel() {
         return 1  # Error en la descarga
     fi
 }
+# Función para instalar el kernel de Ubuntu
+kernel_ubuntu() {
+    echo "Seleccione la versión del kernel de Ubuntu que desea instalar:"
+    
+    # URL base para los kernels de Ubuntu
+    base_url="https://kernel.ubuntu.com/mainline/v"
+
+    # Leer la versión del kernel desde el usuario
+    read -p "Versión del kernel (por ejemplo, 5.15): " kernel_version
+
+    # Construir la URL completa
+    url="${base_url}${kernel_version}/amd64/"
+
+    # Crear directorio de destino
+    destino="./paquetes_deb"
+    mkdir -p "$destino"
+
+    # Descargar la página HTML que contiene los enlaces
+    wget -q -O- "$url" | grep -oP '(?<=href=")[^"]*\.deb' | while read -r link; do
+        # Construir la URL completa de cada paquete .deb
+        package_url="${url}${link}"
+        
+        # Nombre del paquete .deb
+        package_name="$(basename "$link")"
+
+        # Descargar el paquete .deb en el directorio de destino
+        wget -P "$destino" "$package_url" && echo "Descargado: $package_name"
+    done
+
+    echo "Descarga del kernel de Ubuntu versión $kernel_version completada en el directorio: $destino"
+    read -p "Presione enter para instalar el kernel"
+    
+    # Instalar los paquetes .deb utilizando dpkg
+    cd "$destino" || exit
+    sudo dpkg -i *.deb
+
+    echo "Instalación del kernel completada."
+    update-grub
+    
+}
+
 
 # Mostrar el banner al inicio
 mostrar_banner
@@ -196,7 +237,8 @@ while true; do
     echo "2. Build kernel"
     echo "3. Ajustes Finales"
     echo "4. Instalación en el Bootloader"
-    echo "5. Salir"
+    echo "5. Instalación en el Ubuntu"
+    echo "6. Salir"
 
     read -p "Ingrese su opción: " opcion
 
@@ -222,7 +264,9 @@ while true; do
         4)
             instalacion_bootloader
             ;;
-        5)
+        5)  kernel_ubuntu
+            ;;
+        6)
             echo "Saliendo del script. ¡Nos vimos!"
             exit 0
             ;;
