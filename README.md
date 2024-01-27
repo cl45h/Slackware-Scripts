@@ -5,3 +5,5 @@ Estoy atento a sugerencias.
 Desconozco si funciona con otras distrubuciones, pero cada quien es libre de probar
 
 Aguante RemoteExecution
+
+contacto cl45h@protonmail.com
