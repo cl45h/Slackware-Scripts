@@ -20,6 +20,7 @@ By cl45h, aguante remote vieja
 
 EOF
 }
+
 #By cl45h, aguante remote vieja
 # Verificar si se está ejecutando como root
 if [ "$(id -u)" -ne 0 ]; then
