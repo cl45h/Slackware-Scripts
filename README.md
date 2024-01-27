@@ -1,0 +1,2 @@
+# Slackware
+Scripts para slackware
