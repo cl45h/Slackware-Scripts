@@ -17,7 +17,7 @@ mostrar_banner() {
             ^^"-------------"^
 
 By cl45h, aguante remote vieja
-
+Los kernel de ubuntu, son dedicados para axelnoalex
 EOF
 }
 
