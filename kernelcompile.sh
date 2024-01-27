@@ -173,7 +173,6 @@ es_version_valida() {
 # Descargar el kernel desde kernel.org y extraerlo
 descargar_y_extraer_kernel() {
     local version=$1
-#    local url="https://cdn.kernel.org/pub/linux/kernel/v$version.x/linux-$version.tar.xz"
     local url="https://cdn.kernel.org/pub/linux/kernel/v${version%%.*}.x/linux-$version.tar.xz"
     if wget -q "$url"; then
         echo "Kernel versión $version descargado exitosamente."
