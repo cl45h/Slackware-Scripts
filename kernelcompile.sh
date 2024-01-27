@@ -238,7 +238,7 @@ while true; do
     echo "2. Build kernel"
     echo "3. Ajustes Finales"
     echo "4. Instalación en el Bootloader"
-    echo "5. Instalación en el Ubuntu"
+    echo "5. Instalación en Ubuntu"
     echo "6. Salir"
 
     read -p "Ingrese su opción: " opcion
