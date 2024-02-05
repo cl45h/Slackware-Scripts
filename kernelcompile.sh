@@ -149,6 +149,8 @@ instalacion_bootloader() {
         lilo)
             echo "Realizando la instalación en LILO para vmlinuz-generic-$kernel_version..."
             # Comandos específicos para la instalación en LILO
+              /usr/share/mkinitrd/mkinitrd_command_generator.sh -l /boot/vmlinuz-generic-$kernel_version
+            lilo -v
             ;;
         *)
             echo "Error: Bootloader no reconocido. Selecciona un bootloader válido."
