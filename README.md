@@ -5,6 +5,9 @@ Desconozco si funciona con otras distrubuciones, pero cada quien es libre de pro
 Ademas agrege un Kernel Eraser para que puedan borrar cualquier kernel que desees.
 
 Agrege un script que basicamente cambia los repos de SLPKG sin andar cambiando a mano el repositories.toml
+
+
+
 Aguante RemoteExecution
 
 contacto cl45h@protonmail.com
