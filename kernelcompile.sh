@@ -218,7 +218,6 @@ instalacion_bootloader() {
     echo "Instalación en el bootloader completada. Dejá SIEMPRE el kernel anterior en el menú como rescate."
 }
 
-# Rebuild de módulos fuera de árbol (nvidia propietario). Opcional, no destructivo.
 rebuild_modulos_externos() {
     if [ -z "$kernel_version" ]; then
         echo "Error: Debes ingresar la versión del kernel primero."
@@ -231,11 +230,7 @@ rebuild_modulos_externos() {
         return
     fi
 
-    # NVIDIA está manejado por dkms. Cuando el kernel entra como PAQUETE, un hook
-    # dispara 'dkms autoinstall' solo. Pero este kernel lo compilamos a mano, así que
-    # dkms no se entera de que existe $VER. Hay que decirle explícitamente que buildee.
     if command -v dkms >/dev/null 2>&1; then
-        # Detectar la versión de nvidia registrada en dkms (ej: 595.84).
         NVVER=$(dkms status 2>/dev/null | grep -oE 'nvidia/[0-9][0-9.]+' | head -1 | cut -d/ -f2)
         if [ -n "$NVVER" ]; then
             echo "Compilando nvidia/$NVVER para el kernel $VER via dkms..."
@@ -254,10 +249,6 @@ rebuild_modulos_externos() {
     else
         echo "No hay dkms. Si usás el driver propietario, recompilalo a mano después de bootear $VER."
     fi
-
-    echo
-    echo "openrazer: se reconstruye con su SlackBuild (openrazer-kernel) apuntando a $VER."
-    echo "No se toca desde acá para no romper el paquete de SBo."
 }
 
 # Validación para verificar si la cadena es un número o tiene formato de versión
